@@ -64,21 +64,30 @@ if (console.log === 'undefined') {
   
   }; // Init
 
-  /*
-    Module Method
-  */
+
+  Ohana.Get = function ( url, callback ) {
+    
+  } // Get
 
   Ohana.Module = function( name ) {
 
   }; // Module
   
-  /*
-    Data Method
-  */
+
+  Ohana.Template = function( name ) {
+
+  }; // Template
   
+
   Ohana.Data = function( src ) {
 
   }; // Data
+  
+
+  Ohana.Include = function( path ) {
+
+  }; // Include
+
 
   /*
     LocalStorage with Cookie fallback
