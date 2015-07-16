@@ -1,18 +1,23 @@
-<!doctype html>
-<html>
-  <meta charset="utf=8">
-  <head>
-    <title></title>
-  </head>
-  <body>
-
-    <!--
-      Module imports here
-    -->
+<script> Ohana.Include('app/modules/header'); </script>
+  
+  <div class="layout">
+    <div class="col sm-w-100 mid-w-66">
+      <div class="gutter">
+        
+        <h1>Profile Template</h1>
+        
+        {{content}}
+        
+      </div><!--/.gutter-->
+    </div><!--/.col-->
     
-    <!--
-      Page import here
-    -->
-
-  </body>
-</html>
+    <div class="col sm-w-100 mid-w-33">
+      <div class="gutter">
+        
+        <script> Ohana.Include('app/modules/sidebar'); </script>
+      
+      </div><!--/.gutter-->
+    </div><!--/.col-->
+  </div><!--/.layout-->
+  
+<script> Ohana.Include('app/modules/footer'); </script>
