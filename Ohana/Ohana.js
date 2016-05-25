@@ -59,7 +59,23 @@ if (console.log === 'undefined') {
     
     // load Handlebars for templating
     Ohana.Load('Ohana/vendor/handlebars.js', function() {
-      console.log(Handlebars.VERSION);
+      
+      var params = Ohana.getUrlParameters( w.location );
+
+      if ( params.page ) {
+        
+        Ohana.Page( params.page );
+        
+      } else if ( params.module ) {
+        
+        Ohana.page( params.module );
+        
+      } else {
+        
+        // load index
+        
+      }
+      
     });
   
   }; // Init
@@ -77,7 +93,12 @@ if (console.log === 'undefined') {
   Ohana.Template = function( name ) {
 
   }; // Template
-  
+
+  Ohana.Page = function( name ) {
+    
+    console.log(name);
+    
+  }; // Template
 
   Ohana.Data = function( src ) {
 
@@ -196,7 +217,82 @@ if (console.log === 'undefined') {
     }
     
   }; // Off
+  
+  /*
+    Get URL parameters
+  */
+  
+  Ohana.getUrlParameters = function ( url ) {
 
+    // initialize the array & variables
+    var query_string = {},
+        query,
+        q,
+        pair,
+        arr,
+        vars,
+        varsLength,
+        typeTest;
+  
+    // get current url if nothing passed in
+    if (typeof url === 'undefined') {
+  
+      if (window.location.search !== '') {
+
+        query = window.location.search;
+
+      } else {
+
+        return 'undefined';
+
+      }
+  
+    }
+  
+    // check if the value is a string or a URL from the address bar
+    if (typeof url === 'string') {
+  
+      query = url.split('?')[1];
+  
+    } else {
+  
+      query = url.search.substring(1);
+  
+    }
+  
+    // split the remaining string/object at the ampersands and dump them into an array
+    vars = query.split('&');
+    varsLength = vars.length;
+  
+    // loop through the array and push to a secondary array with key/value matching to access each object
+    for (q = 0; q < varsLength; q = q + 1) {
+  
+      // split each pair at the = size
+      pair = vars[q].split('=');
+      typeTest = typeof (query_string[pair[0]]);
+
+      if (typeTest === 'undefined') {
+
+        query_string[pair[0]] = pair[1];
+
+      } else if (typeTest === 'string') {
+
+        arr = [ query_string[pair[0]], pair[1] ];
+        query_string[pair[0]] = arr;
+
+      } else {
+
+        // push the pairing into the query_string array
+        query_string[pair[0]].push(pair[1]);
+
+      }
+  
+    } // loop
+  
+    return query_string;
+
+  };
+  
   /*
     Start Ohana
   */
